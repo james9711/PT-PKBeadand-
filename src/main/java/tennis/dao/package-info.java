@@ -1,4 +1,4 @@
-/**tennis package info.java.*/
+/**Az adatbázishoz tartozó java fileokat tartalmazó package.*/
 package tennis.dao;
 
 /*-

@@ -43,7 +43,7 @@ import tennis.dao.SampleDB;
 public class Tennis extends Application {
 
     /**
-     * DataBaseManager létrehozása a main, Tennis classban.
+     * SampleDB létrehozása a main, Tennis classban.
      */
     private static final SampleDB DB_MANAGER = SampleDB.getDbPeldany();
 

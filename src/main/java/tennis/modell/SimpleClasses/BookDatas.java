@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 import tennis.Tennis;
 
 /**
- * Az adatbázisba szügséges adatok tárolását lebonyolító osztály.
+ * Az adatbázishoz szügséges adatok tárolására alkalmas osztály.
  *
  * @author adamberki97
  */

@@ -1,4 +1,4 @@
-/*-
+package SimpleClassTests;/*-
  * #%L
  * TennisGyak
  * %%
@@ -24,27 +24,24 @@
  * #L%
  */
 import org.junit.Test;
-import tennis.modell.SimpleClasses.Booleans;
+import tennis.modell.SimpleClasses.Game;
 
 import static org.junit.Assert.*;
 
-public class BooleansTest {
+public class GameTest {
 
-    Booleans tester = new Booleans();
+    Game tester = new Game();
 
     @Test
-    public void BooleansSetValueTester() {
-        tester.setValue(true);
-        assertEquals("Set Value does not work!", true, tester.getValue());
+    public void GameSetValueTester() {
+        tester.setValue(4);
+        assertEquals("Set Value does not work!", 4, tester.getValue());
     }
 
     @Test
-    public void BooleansIncreaseTester() {
-        tester.setValue(true);
-        tester.inverseValue();
-        assertEquals("Inverse Value does not work!",false, tester.getValue());
+    public void GameIncreaseTester() {
+        tester.setValue(0);
+        tester.increaseValue();
+        assertEquals("Increase does not work!",1, tester.getValue());
     }
 }
-
-
-

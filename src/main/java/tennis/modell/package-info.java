@@ -1,4 +1,4 @@
-/**tennis package info.java.*/
+/**A modell osztályokat tartalmazó package.*/
 package tennis.modell;
 
 /*-

@@ -1,4 +1,4 @@
-/*-
+package SimpleClassTests;/*-
  * #%L
  * TennisGyak
  * %%

@@ -212,8 +212,6 @@ public class BookingFXMLDocumentController {
      */
     private int untilInHour;
 
-    boolean isBookingSuccesfull;
-
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Button actions">
@@ -258,7 +256,7 @@ public class BookingFXMLDocumentController {
                 usePopUpWindow("We are not open at the selected time!");
             }
         } else {
-            LOG.info("Invalid calculation! Something is not set with tha resrevation hours!");
+            LOG.info("Invalid calculation! Something was not set with the resrevation hours!");
             usePopUpWindow("For calc please fill the hour and duration section!");
         }
 
@@ -312,6 +310,7 @@ public class BookingFXMLDocumentController {
     @FXML
     private void handlefoglalasRogzitesOK(final ActionEvent event) throws IOException {
         step1Label.setTextFill(Color.web("#F0F0F0"));
+        step2Label.setTextFill(Color.web("#F0F0F0"));
         step2Label.setTextFill(Color.web("#F0F0F0"));
         step3Label.setTextFill(Color.web("#F0F0F0"));
         foglalasPane.setOpacity(1);
@@ -371,7 +370,7 @@ public class BookingFXMLDocumentController {
         if (diakCB.isSelected() || dolgozoCB.isSelected()) {
             segedAr = (int) (segedAr * 0.5);
             foglalasAraLabel.setText(Integer.toString(segedAr));
-            LOG.info("Reduced price...!");
+            LOG.info("Reduced price...");
         } else {
             foglalasAraLabel.setText(Integer.toString(segedAr));
         }

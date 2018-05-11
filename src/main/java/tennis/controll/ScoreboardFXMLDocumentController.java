@@ -343,7 +343,7 @@ public class ScoreboardFXMLDocumentController implements Initializable {
             updateLabelsAfterPoint();
             labelAllHomeAces.setText("" + allHomeAce.getValue());
         } else {
-            LOG.info("Only serving player can hit ace fault!");
+            LOG.info("Only serving player can hit an ace!");
         }
     }
 
@@ -360,7 +360,7 @@ public class ScoreboardFXMLDocumentController implements Initializable {
             updateLabelsAfterPoint();
             labelAllAwayAces.setText("" + allAwayAce.getValue());
         } else {
-            LOG.info("Only serving player can ace double fault!");
+            LOG.info("Only serving player can hit an ace!");
         }
     }
 

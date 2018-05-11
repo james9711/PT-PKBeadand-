@@ -93,7 +93,7 @@ public class PdfGeneration {
             document.add(base);
 
         } catch (DocumentException | IOException e) {
-            LOG.error("The PDF can not be created!");
+            LOG.error("The PDF can not be generated!");
         }
 
         document.close();

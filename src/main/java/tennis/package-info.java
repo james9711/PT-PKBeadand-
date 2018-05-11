@@ -1,4 +1,4 @@
-/**tennis package info.java.*/
+/**A Controll, DAO, Modell java packageket és a main-t tartalmazó package.*/
 package tennis;
 
 /*-

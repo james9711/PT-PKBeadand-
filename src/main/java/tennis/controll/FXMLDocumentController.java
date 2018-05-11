@@ -96,10 +96,6 @@ public class FXMLDocumentController {
     @FXML
     private Label isCodeValidLabel;
 
-    /**
-     * A kód érvényességét tároló boolean változó. True, ha a megadott kód érvényes volt, ellenkező esetben false.
-     */
-    boolean codeAccepted = false;
 
 //</editor-fold>
 
@@ -115,7 +111,6 @@ public class FXMLDocumentController {
     @FXML
     private void handlemenuStartGameButton(final ActionEvent event) throws IOException {
         loginPane.setVisible(true);
-        codeAccepted = false;
     }
 
     /**
@@ -177,7 +172,7 @@ public class FXMLDocumentController {
      */
     @FXML
     private void handleStart(final ActionEvent event) throws IOException {
-        if (codeAccepted) {
+        if (isThisCodeValid()) {
             changeFXML("/fxml/Scoreboard.fxml", menuPane);
             LOG.info("Match can be started!");
         } else {
@@ -186,6 +181,10 @@ public class FXMLDocumentController {
         loginPane.setVisible(false);
         LOG.info("Back to menu!");
     }
+
+//</editor-fold>
+
+//<editor-fold defaultstate="collapsed" desc="Functions">
 
     /**
      * Sikeres kódbeváltás esetén az adatbázisban az adott kód frissítése used-ra, a többszöri használhatóság megelőzése végett.
@@ -202,20 +201,22 @@ public class FXMLDocumentController {
 
     /**
      * A felhasználó által megadott kódot ellenőrzi az adatbázis segítségével.
+     *
+     * @return true if code accepted, if invalid then the return value is false.
      */
-    public final void isThisCodeValid() {
+    public final boolean isThisCodeValid() {
 
         if (bookingEntityChecker != null && codeTF.getText() != "used") {
             setAcceptedCodeUsed();
-            codeAccepted = true;
             isCodeValidLabel.setTextFill(Color.web("#5cf54e"));
             isCodeValidLabel.setText("Code was valid! Have fun! :)");
             LOG.info("Code was valid!");
+            return true;
         } else {
-            codeAccepted = false;
             isCodeValidLabel.setTextFill(Color.web("#cd0b0b"));
             isCodeValidLabel.setText("Code was invalid! >:c");
             LOG.info("Code was invalid!");
+            return false;
         }
 
     }
@@ -232,6 +233,6 @@ public class FXMLDocumentController {
         oldPane.getChildren().setAll(pane);
     }
 
-//</editor-fold>
+    //</editor-fold>
 
 }

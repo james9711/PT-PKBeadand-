@@ -1,4 +1,4 @@
-/*-
+package SimpleClassTests;/*-
  * #%L
  * TennisGyak
  * %%
@@ -24,26 +24,26 @@
  * #L%
  */
 import org.junit.Test;
-import tennis.modell.SimpleClasses.Set;
+import tennis.modell.SimpleClasses.Point;
 
 import static org.junit.Assert.*;
 
-public class SetTest {
+public class PointTest {
 
-    Set tester = new Set();
+    Point tester = new Point();
 
     @Test
-    public void SetsSetValueTester() {
-        tester.setValue(2);
-        assertEquals("Set Value does not work!", 2, tester.getValue());
+    public void PointSetValueTester() {
+
+        tester.setValue(15);
+        assertEquals("Set Value does not work!", 15, tester.getValue());
+
     }
 
     @Test
-    public void SetsIncreaseTester() {
+    public void PointIncreaseTester() {
         tester.setValue(0);
         tester.increaseValue();
         assertEquals("Increase does not work!",1, tester.getValue());
-    }
+        }
 }
-
-

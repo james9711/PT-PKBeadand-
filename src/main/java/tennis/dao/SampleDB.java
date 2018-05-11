@@ -38,11 +38,10 @@ import org.slf4j.LoggerFactory;
 import tennis.Tennis;
 
 /**
- * Az adatbázissal való kapcsolattartást, műveleteket elvégző osztály.
+ * Az adatbázissal való kapcsolattartást, műveleteket deffiniáló osztály.
  *
  * @author adamberki97
  */
-@Slf4j
 public final class SampleDB {
 
     /**

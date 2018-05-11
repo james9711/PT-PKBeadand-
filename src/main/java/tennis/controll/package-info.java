@@ -1,4 +1,4 @@
-/**tennis package info.java.*/
+/**Az FXML-ek vezérlését végző java fileokat tartalmazó package.*/
 package tennis.controll;
 
 /*-

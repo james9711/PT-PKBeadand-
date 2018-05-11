@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>testlog.log</file>
+        <append>true</append>
+        <immediateFlush>true</immediateFlush>
+        <encoder>
+            <charset>ISO-8859-2</charset>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <root level="DEBUG">
+        <appender-ref ref="FILE" />
+    </root>
+</Configuration>

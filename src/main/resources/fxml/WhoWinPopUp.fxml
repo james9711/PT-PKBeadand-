@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="meccsUtanPane" fx:id="meccsUtanPane" opacity="0.95" prefHeight="520.0" prefWidth="940.0" style="-fx-background-color: #1A471A;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tennis.controll.FXMLDocumentController">
+   <children>
+      <ImageView fitHeight="291.0" fitWidth="540.0" layoutX="267.0" layoutY="46.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Pictures/utana1.jpg" />
+         </image>
+      </ImageView>
+      <Label id="labelMeccsUtan" fx:id="labelMeccsUtan" alignment="CENTER" layoutX="217.0" layoutY="125.0" prefHeight="50.0" prefWidth="334.0" text="Match finished!" textFill="WHITE">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+      </Label>
+      <Button id="meccsUtanButton" fx:id="meccsUtanButton" layoutX="593.0" layoutY="279.0" mnemonicParsing="false" onAction="#handlemeccsUtanButton" prefHeight="31.0" prefWidth="153.0" text="Back to menu" AnchorPane.rightAnchor="220.0" />
+      <Button id="newGameButton" fx:id="newGameButton" layoutX="194.0" layoutY="279.0" mnemonicParsing="false" onAction="#handlenewGameButton" prefHeight="31.0" prefWidth="153.0" text="New game" AnchorPane.leftAnchor="220.0" />
+   </children>
+</AnchorPane>

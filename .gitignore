@@ -1,0 +1,16 @@
+# Intellij
+.idea/
+*.iml
+*.iws
+ 
+# Maven
+log/
+target/
+
+.classpath
+.project
+.settings/
+.DS_Store
+
+tennisDB/
+derby.log

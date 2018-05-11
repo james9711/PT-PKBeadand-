@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="bookingPane" fx:id="bookingPane" prefHeight="480.0" prefWidth="920.0" style="-fx-background-color: #1A471A;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tennis.controll.BookingFXMLDocumentController">
+   <children>
+      <Pane fx:id="foglalasPane" prefHeight="500.0" prefWidth="940.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="457.0" fitWidth="389.0" layoutX="498.0" layoutY="37.0" opacity="0.57" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Pictures/pattern.png" />
+               </image>
+            </ImageView>
+            <Pane layoutX="518.0" layoutY="90.0" prefHeight="60.0" prefWidth="100.0">
+               <children>
+                  <TextField fx:id="hourTF" alignment="CENTER" layoutX="-3.0" layoutY="15.0" prefHeight="20.0" prefWidth="100.0" promptText="00">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </TextField>
+                  <Label alignment="CENTER" layoutX="5.0" layoutY="-10.0" prefHeight="25.0" prefWidth="90.0" text="HR" textFill="#c6c6c6">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Label alignment="CENTER" layoutX="299.0" layoutY="25.0" prefHeight="40.0" prefWidth="335.0" text="Book your court here!" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="20.0" />
+               </font>
+            </Label>
+            <Button id="foglalasButton" fx:id="foglalasButton" layoutX="80.0" layoutY="385.0" mnemonicParsing="false" onAction="#handlefoglalasButton" prefHeight="31.0" prefWidth="135.0" text="Book" />
+            <Button id="foglalasBackToMenu" fx:id="foglalasBackToMenu" layoutX="729.0" layoutY="383.0" mnemonicParsing="false" onAction="#handlefoglalasBackToMenu" prefHeight="31.0" prefWidth="135.0" text="Menu" />
+            <DatePicker fx:id="datePicker" layoutX="80.0" layoutY="107.0" onAction="#showDate" prefHeight="31.0" prefWidth="369.0" />
+            <Label fx:id="showdateLabel" contentDisplay="CENTER" layoutX="220.0" layoutY="226.0" prefHeight="21.0" prefWidth="187.0" textFill="WHITE" />
+            <Label layoutX="77.0" layoutY="221.0" prefHeight="25.0" prefWidth="135.0" text="Selected date:" textFill="#ebebeb">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <Label layoutX="79.0" layoutY="185.0" prefHeight="25.0" prefWidth="135.0" text="Name:" textFill="#ebebeb">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <Button id="calculateButton" fx:id="calculateButton" layoutX="738.0" layoutY="114.0" mnemonicParsing="false" onAction="#handleCalculateButton" prefHeight="31.0" prefWidth="116.0" text="Calculate" />
+            <Label layoutX="518.0" layoutY="203.0" prefHeight="31.0" prefWidth="187.0" text="Price of your reservation" textFill="#fff9f9">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <TextField id="foglaloNeveTF" fx:id="foglaloNeveTF" layoutX="218.0" layoutY="180.0" prefHeight="21.0" prefWidth="187.0" promptText="Example Jack" />
+            <Label id="foglalasAraLabel" fx:id="foglalasAraLabel" layoutX="710.0" layoutY="203.0" prefHeight="31.0" prefWidth="100.0" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <CheckBox fx:id="diakCB" layoutX="518.0" layoutY="166.0" mnemonicParsing="false" onAction="#handlediakCB" prefHeight="31.0" prefWidth="90.0" text="Student" textFill="#eeeeee">
+               <font>
+                  <Font size="14.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="dolgozoCB" layoutX="656.0" layoutY="166.0" mnemonicParsing="false" onAction="#handledolgozoCB" prefHeight="31.0" prefWidth="187.0" text="University worker" textFill="#eeeeee">
+               <font>
+                  <Font size="14.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="needPdfCB" layoutX="80.0" layoutY="356.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="238.0" text="Create &amp; open the PDF" textFill="#d3d2d2" />
+            <ChoiceBox fx:id="hourCB" layoutX="639.0" layoutY="113.0" prefHeight="31.0" prefWidth="73.0">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="1" />
+                     <String fx:value="2" />
+                     <String fx:value="3" />
+                     <String fx:value="4" />
+                  </FXCollections>
+               </items>
+            </ChoiceBox>
+            <Label alignment="CENTER" layoutX="639.0" layoutY="82.0" prefHeight="25.0" prefWidth="90.0" text="DURATION" textFill="#c6c6c6">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="showdateLabel1" contentDisplay="CENTER" layoutX="222.0" layoutY="221.0" prefHeight="21.0" prefWidth="187.0" textFill="WHITE" />
+            <Label alignment="CENTER_RIGHT" layoutX="572.0" layoutY="423.0" prefHeight="25.0" prefWidth="298.0" text="Monday-Sunday : 8:00 - 18:00 " textFill="#ff6e6e">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="courtCB" layoutX="219.0" layoutY="259.0" prefHeight="25.0" prefWidth="73.0">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="1" />
+                     <String fx:value="2" />
+                     <String fx:value="3" />
+                     <String fx:value="4" />
+                  </FXCollections>
+               </items>
+            </ChoiceBox>
+            <Label layoutX="79.0" layoutY="259.0" prefHeight="31.0" prefWidth="135.0" text="Which court?" textFill="#ebebeb">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="step1Label" layoutX="516.0" layoutY="250.0" prefHeight="31.0" prefWidth="204.0" text="1. Calculate your price" textFill="#f0f0f0">
+               <font>
+                  <Font name="System Italic" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="step2Label" layoutX="516.0" layoutY="276.0" prefHeight="31.0" prefWidth="204.0" text="2. Give your details in the left" textFill="#f2f2f2">
+               <font>
+                  <Font name="System Italic" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="step3Label" layoutX="516.0" layoutY="304.0" prefHeight="31.0" prefWidth="204.0" text="3. Book your court" textFill="#f2f2f2">
+               <font>
+                  <Font name="System Italic" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="516.0" layoutY="334.0" prefHeight="31.0" prefWidth="204.0" text="4. Enjoy your reservation" textFill="#f2f2f2">
+               <font>
+                  <Font name="System Italic" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="foglalasUtanPane" layoutX="162.0" layoutY="110.0" prefHeight="299.0" prefWidth="609.0" style="-fx-background-color: #446743;" visible="false">
+         <children>
+            <Label fx:id="foglalasRogzitesLabel" alignment="CENTER" layoutX="14.0" layoutY="58.0" prefHeight="54.0" prefWidth="581.0" textFill="#f5f5f5">
+               <font>
+                  <Font size="19.0" />
+               </font></Label>
+            <Button fx:id="foglalasRogzitesOK" layoutX="268.0" layoutY="223.0" mnemonicParsing="false" onAction="#handlefoglalasRogzitesOK" prefHeight="31.0" prefWidth="81.0" text="OK" />
+            <Label id="codeLabel" fx:id="codeLabel" alignment="CENTER" layoutX="36.0" layoutY="134.0" prefHeight="31.0" prefWidth="537.0" textFill="#eb0000">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

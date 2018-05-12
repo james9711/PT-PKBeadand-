@@ -46,10 +46,9 @@ import javafx.stage.FileChooser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tennis.dao.BookingEntity;
-import tennis.dao.SampleDB;
+import tennis.dao.BookingEntityDaoImpl;
 import tennis.modell.SimpleClasses.BookDatas;
 import tennis.modell.PdfGeneration;
-import tennis.Tennis;
 
 /**
  * A foglalási panelt kezelő osztály.
@@ -64,9 +63,9 @@ public class BookingFXMLDocumentController {
     private static final Logger LOG = LoggerFactory.getLogger(BookingFXMLDocumentController.class);
 
     /**
-     * DB_MANAGER deffiniálása (SampleDB), példány visszaadása.
+     * BookingEntityDao deffiniálása (BookingEntityDaoImpl), példány visszaadása.
      */
-    private static final SampleDB DB_MANAGER = SampleDB.getDbPeldany();
+    private static final BookingEntityDaoImpl BookingEntityDao = BookingEntityDaoImpl.getBookingEntityDaoImpl();
 
     /**
      * A BookingEntity osztály egy példánya bookingEntity néven.
@@ -416,12 +415,12 @@ public class BookingFXMLDocumentController {
         setEntityValues();
 
         try {
-            bookingEntityChecker = DB_MANAGER.checkIsAReservationPossible(bookingEntity.getResdate(), bookingEntity.getCourt());
+            bookingEntityChecker = BookingEntityDao.checkIsAReservationPossible(bookingEntity.getResdate(), bookingEntity.getCourt());
             if (bookingEntityChecker == null) {
                 usePopUpWindow("Dear " + bookDatas.getCustomersName() + ", we booked your reservation!");
                 codeLabel.setText("Your code for our programm is: " + bookDatas.getCodeForProg());
                 savePDF();
-                DB_MANAGER.save(bookingEntity);
+                BookingEntityDao.save(bookingEntity);
                 LOG.info("Reservation made!");
             } else {
                 usePopUpWindow("Choosen date: " + bookingEntity.getResdate() + "already booked!");

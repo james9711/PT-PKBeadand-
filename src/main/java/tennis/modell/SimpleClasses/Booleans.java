@@ -51,7 +51,7 @@ public class Booleans {
      * Létrehoz egy Booleans objektumot. Konstruktor a példányosításhoz.
      */
     public Booleans() {
-        LOG.info("Booleans object created!");
+        //LOG.info("Booleans object created!");
     }
 
     /**

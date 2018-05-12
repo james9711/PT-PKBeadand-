@@ -51,7 +51,7 @@ public class Set {
      * Létrehoz egy Set objektumot. Konstruktor a példányosításhoz.
      */
     public Set() {
-        LOG.info("Set object created!");
+        //LOG.info("Set object created!");
     }
 
     /**

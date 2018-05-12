@@ -51,7 +51,7 @@ public class Point {
      * Létrehoz egy Point objektumot. Konstruktor a példányosításhoz.
      */
     public Point() {
-        LOG.info("Point object created!");
+        //LOG.info("Point object created!");
     }
 
     /**

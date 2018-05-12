@@ -51,7 +51,7 @@ public class Game {
      * Létrehoz egy Game objektumot. Konstruktor a példányosításhoz.
      */
     public Game() {
-        LOG.info("Game object created!");
+        //LOG.info("Game object created!");
     }
 
     /**

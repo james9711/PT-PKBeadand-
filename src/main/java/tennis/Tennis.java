@@ -33,7 +33,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tennis.dao.SampleDB;
+import tennis.dao.BookingEntityDaoImpl;
+import tennis.dao.DBManager;
 
 /**
  * A Main osztályunkat tartalmazó class.
@@ -43,9 +44,9 @@ import tennis.dao.SampleDB;
 public class Tennis extends Application {
 
     /**
-     * SampleDB létrehozása a main, Tennis classban.
+     * DBManager létrehozása a main, Tennis classban.
      */
-    private static final SampleDB DB_MANAGER = SampleDB.getDbPeldany();
+    private static final DBManager DB_MANAGER = DBManager.getDbPeldany();
 
     /**
      * A logger létrehozása a Tennis classra.

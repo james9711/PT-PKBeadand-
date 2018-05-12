@@ -35,84 +35,56 @@ import javax.persistence.Query;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tennis.Tennis;
+
+import java.awt.print.Book;
 
 /**
- * Az adatbázissal való kapcsolattartást, műveleteket deffiniáló osztály.
+ * Az adatbázisban végzendő műveleteket deffiniáló, implementáló osztály.
  *
  * @author adamberki97
  */
-public final class SampleDB {
+public class BookingEntityDaoImpl implements BookingEntityDao {
 
     /**
-     * A logger létrehozása a SampleDB osztályba.
+     * A logger létrehozása a BookingEntityDaoImpl osztályba.
      */
-    private static final Logger LOG = LoggerFactory.getLogger(SampleDB.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BookingEntityDaoImpl.class);
 
     /**
-     * DB_PELDANY létrehozása, SampleDB példányosítása.
+     * DBManager létrehozása a main, BookingEntityDaoImpl classban.
      */
-    private static final SampleDB DB_PELDANY = new SampleDB();
+    private static final DBManager DB_MANAGER = DBManager.getDbPeldany();
 
     /**
-     * Egy EntityManager deffiniálása.
+     * bookingEntityDaoImpl létrehozása, BookingEntityDaoImpl példányosítása.
      */
-    private EntityManager em;
+    private static final BookingEntityDaoImpl bookingEntityDaoImpl = new BookingEntityDaoImpl();
 
     /**
-     * A SampleDB osztályhoz tartozó konstruktor.
+     * A BookingEntityDaoImpl osztályhoz tartozó konstruktor.
      */
-    private SampleDB() {
+    private BookingEntityDaoImpl() {
     }
 
     /**
-     * A SampleDB adott példányát adja vissza.
+     * A BookingEntityDaoImpl adott példányát adja vissza.
      *
-     * @return DB_PELDANY: a pédány.
+     * @return bookingEntityDaoImpl: a pédány.
      */
-    public static SampleDB getDbPeldany() {
-        return DB_PELDANY;
-    }
-
-    /**
-     * Az adatbázishoz való csatlakozást végző metódus.
-     */
-    public void connectDB() {
-        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("tDB");
-        em = emFactory.createEntityManager();
-        LOG.info("Datebase: connection OK!");
-    }
-
-    /**
-     * Az adatbázisról való lecsatlakozást végző metódus.
-     */
-    public void disconnectDB() {
-        if (connected()) {
-            em.close();
-            LOG.info("Datebase: disconnection OK!");
-        }
-        em = null;
-    }
-
-    /**
-     * Az adatbázishoz való csatlakozást vizsgáló metódus.
-     *
-     * @return igaz: ha az entity nem üres és nyitott.
-     */
-    public boolean connected() {
-        return em != null && em.isOpen();
+    public static BookingEntityDaoImpl getBookingEntityDaoImpl() {
+        return bookingEntityDaoImpl;
     }
 
     /**
      * A táblába való beszúrást és frissítést végző metódus.
      *
      * @param entity : a lementendő entitás.
-     * @return entity : a lementendő entitás.
-     * @throws Exception ha kivétel váltódik ki.
+     * @return entity : a lementett entitás.
      */
-    public BookingEntity save(final BookingEntity entity) throws Exception {
+    @Override
+    public BookingEntity save(final BookingEntity entity) {
 
-        if (!connected()) {
+        if (!DB_MANAGER.connected()) {
             LOG.info("No database connection!");
             throw new IllegalStateException("No database connection!");
         }
@@ -122,35 +94,29 @@ public final class SampleDB {
             throw new IllegalArgumentException("Saved entity is null!");
         }
 
-        try {
-            em.getTransaction().begin();
+        DBManager.entityManager.getTransaction().begin();
 
-            if (entity.getId() == null) {
-                LOG.info("Inserting into database...");
-                em.persist(entity);
-            } else {
-                LOG.info("Updating database...");
-                em.merge(entity);
-            }
-
-            em.getTransaction().commit();
-
-            return entity;
-
-        } catch (PersistenceException e) {
-            LOG.error("JPA queries error!");
-            throw new Exception("JPA error!", e);
+        if (entity.getId() == null) {
+            LOG.info("Inserting into database...");
+            DBManager.entityManager.persist(entity);
+        } else {
+            LOG.info("Updating database...");
+            DBManager.entityManager.merge(entity);
         }
+
+        DBManager.entityManager.getTransaction().commit();
+
+        return entity;
     }
 
     /**
      * A táblából való törlést végző metódus.
      *
      * @param entity : a torlendő entitás.
-     * @throws Exception ha kivétel váltódik ki.
      */
-    public void delete(final BookingEntity entity) throws Exception {
-        if (!connected()) {
+    @Override
+    public void delete(final BookingEntity entity) {
+        if (!DB_MANAGER.connected()) {
             LOG.info("No database connection!");
             throw new IllegalStateException("No database connection!");
         }
@@ -160,22 +126,10 @@ public final class SampleDB {
             throw new IllegalArgumentException("The entity you want to delete is null or has no ID");
         }
 
-        try {
-            BookingEntity delEntity = em.find(BookingEntity.class, entity.getId());
+            DBManager.entityManager.getTransaction().begin();
+            DBManager.entityManager.remove(entity);
+            DBManager.entityManager.getTransaction().commit();
 
-            if (delEntity.getId() == null) {
-                LOG.error("No reservation with the ID!");
-                throw new IllegalArgumentException("No reservation with the ID!");
-            }
-
-            em.getTransaction().begin();
-            em.remove(delEntity);
-            em.getTransaction().commit();
-
-        } catch (PersistenceException e) {
-            LOG.error("JPA queries error!");
-            throw new Exception("JPA error", e);
-        }
     }
 
     /**
@@ -183,10 +137,10 @@ public final class SampleDB {
      *
      * @param id : a keresés alapját adó Long típusú érték.
      * @return entity : a megtalált entitás.
-     * @throws Exception ha kivétel váltódik ki.
      */
-    public BookingEntity findReservationByID(final Long id) throws Exception {
-        if (!connected()) {
+    @Override
+    public BookingEntity findReservationByID(final Long id) {
+        if (!DB_MANAGER.connected()) {
             LOG.info("No database connection!");
             throw new IllegalStateException("No database connection!");
         }
@@ -197,7 +151,7 @@ public final class SampleDB {
 
         try {
 
-            Query query = em.createNamedQuery("BookingEntity.findReservationByID");
+            Query query = DBManager.entityManager.createNamedQuery("BookingEntity.findReservationByID");
             query.setParameter("id", id);
             BookingEntity entity = (BookingEntity) query.getSingleResult();
             LOG.info("Queries made!");
@@ -206,9 +160,6 @@ public final class SampleDB {
         } catch (NoResultException e) {
             LOG.error("No reservation with the ID!");
             return null;
-        } catch (PersistenceException e) {
-            LOG.error("JPA queries error!");
-            throw new Exception("JPA error!", e);
         }
     }
 
@@ -218,10 +169,10 @@ public final class SampleDB {
      * @param resdate : a keresés alapját adó String.
      * @param court   : a keresés alapját adó Integer.
      * @return entity : a megtalált entitás.
-     * @throws Exception ha kivétel váltódik ki.
      */
-    public BookingEntity checkIsAReservationPossible(final String resdate, final Integer court) throws Exception {
-        if (!connected()) {
+    @Override
+    public BookingEntity checkIsAReservationPossible(final String resdate, final Integer court) {
+        if (!DB_MANAGER.connected()) {
             LOG.info("No database connection!");
             throw new IllegalStateException("No database connection!");
         }
@@ -232,7 +183,7 @@ public final class SampleDB {
 
         try {
 
-            Query query = em.createNamedQuery("BookingEntity.checkIsAReservationPossible");
+            Query query = DBManager.entityManager.createNamedQuery("BookingEntity.checkIsAReservationPossible");
             query.setParameter("resdate", resdate);
             query.setParameter("court", court);
             BookingEntity entity = (BookingEntity) query.getSingleResult();
@@ -242,9 +193,6 @@ public final class SampleDB {
         } catch (NoResultException e) {
             LOG.info("Court is available at that time, resrevation is possible!");
             return null;
-        } catch (PersistenceException e) {
-            LOG.error("JPA queries error!");
-            throw new Exception("JPA error!", e);
         }
     }
 
@@ -253,10 +201,10 @@ public final class SampleDB {
      *
      * @param code : a keresés alapját adó String.
      * @return entity : a megtalált entitás.
-     * @throws Exception ha kivétel váltódik ki.
      */
-    public BookingEntity checkIfValidCode(final String code) throws Exception {
-        if (!connected()) {
+    @Override
+    public BookingEntity checkIfValidCode(final String code) {
+        if (!DB_MANAGER.connected()) {
             LOG.info("No database connection!");
             throw new IllegalStateException("No database connection!");
         }
@@ -267,7 +215,7 @@ public final class SampleDB {
 
         try {
 
-            Query query = em.createNamedQuery("BookingEntity.checkIfValidCode");
+            Query query = DBManager.entityManager.createNamedQuery("BookingEntity.checkIfValidCode");
             query.setParameter("code", code);
             BookingEntity entity = (BookingEntity) query.getSingleResult();
             LOG.info("Queries made!");
@@ -276,9 +224,6 @@ public final class SampleDB {
         } catch (NoResultException e) {
             LOG.info("Invalid code!");
             return null;
-        } catch (PersistenceException e) {
-            LOG.error("JPA queries error!");
-            throw new Exception("JPA error!", e);
         }
     }
 

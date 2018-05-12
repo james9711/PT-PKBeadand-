@@ -38,9 +38,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tennis.Tennis;
 import tennis.dao.BookingEntity;
-import tennis.dao.SampleDB;
+import tennis.dao.BookingEntityDaoImpl;
 
 /**
  * Főbb FXML-ek között való váltást, a ststisztika vezetőhöz való jogosultság vizsgálatát megvalósító osztály.
@@ -55,9 +54,9 @@ public class FXMLDocumentController {
     private static final Logger LOG = LoggerFactory.getLogger(FXMLDocumentController.class);
 
     /**
-     * DB_MANAGER deffiniálása (SampleDB), példány visszaadása.
+     * BookingEntityDao deffiniálása (BookingEntityDaoImpl), példány visszaadása.
      */
-    private static final SampleDB DB_MANAGER = SampleDB.getDbPeldany();
+    private static final BookingEntityDaoImpl BookingEntityDao = BookingEntityDaoImpl.getBookingEntityDaoImpl();
 
     /**
      * A BookingEntity osztály egy példánya bookingEntityChecker néven.
@@ -160,7 +159,7 @@ public class FXMLDocumentController {
      */
     @FXML
     private void handleredeemCode(final ActionEvent event) throws Exception {
-        bookingEntityChecker = DB_MANAGER.checkIfValidCode(codeTF.getText());
+        bookingEntityChecker = BookingEntityDao.checkIfValidCode(codeTF.getText());
         isThisCodeValid();
     }
 
@@ -192,7 +191,7 @@ public class FXMLDocumentController {
     public final void setAcceptedCodeUsed() {
         bookingEntityChecker.setCode("used");
         try {
-            DB_MANAGER.save(bookingEntityChecker);
+            BookingEntityDao.save(bookingEntityChecker);
             LOG.error("Used Code updated!");
         } catch (Exception e1) {
             LOG.error("Can not update Code value!");
